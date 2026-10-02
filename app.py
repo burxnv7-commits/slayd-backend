@@ -42,7 +42,9 @@ def generate():
     out=io.BytesIO(); prs.save(out); out.seek(0)
     filename=re.sub(r'[^\w\-]+','_',topic,flags=re.UNICODE)[:50] or 'taqdimot'
     return send_file(out,as_attachment=True,download_name=f'{filename}.pptx',mimetype='application/vnd.openxmlformats-officedocument.presentationml.presentation')
-    @app.post("/webhooks/tezcheck")
+    return send_file(out,as_attachment=True,download_name=f'{filename}.pptx',mimetype='application/vnd.openxmlformats-officedocument.presentationml.presentation')
+
+@app.post("/webhooks/tezcheck")
 def tezcheck_webhook():
     data = request.get_json(silent=True) or {}
     print("Tezcheck webhook:", data)
